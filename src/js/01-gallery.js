@@ -5,5 +5,5 @@ import { galleryItems } from './gallery-items';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-console.log(galleryItems);
+// console.log(galleryItems);
 console.log(SimpleLightbox);
