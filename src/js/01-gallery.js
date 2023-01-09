@@ -6,4 +6,4 @@ import { galleryItems } from './gallery-items';
 const a = 10;
 
 console.log(a);
-console.log(galleryItems);
+// console.log(galleryItems);
