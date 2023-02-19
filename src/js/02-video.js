@@ -11,7 +11,10 @@ const player = new Player(iframe);
 player.on(
   'timeupdate',
   throttle(function (runVideoTime) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(runVideoTime.seconds));
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(Math.round(runVideoTime.seconds))
+    );
   }, 1000)
 );
 
