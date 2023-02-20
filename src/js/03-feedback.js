@@ -9,30 +9,42 @@ const STORAGE_KEY = 'feedback-form-state';
 form.addEventListener('input', throttle(onFormInput, 500));
 form.addEventListener('submit', onFormSubmit);
 
-let formData = {};
+// let formData = {};
 
 getSaveMessage();
 
 function onFormInput(evt) {
+  let formData = localStorage.getItem(STORAGE_KEY);
+  formData = formData ? JSON.parse(formData) : {};
   formData[evt.target.name] = evt.target.value;
+
   localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
-  console.log(formData);
 }
 
 function onFormSubmit(evt) {
   evt.preventDefault();
-  evt.currentTarget.reset();
+  let formData = localStorage.getItem(STORAGE_KEY);
+  //   console.dir(evt.currentTarget.elements);
+  const emailValue = evt.currentTarget.elements.email.value;
+  const massageValue = evt.currentTarget.elements.message;
+
+  if (emailValue === '' || massageValue === '') {
+    return alert('Error!Enter your data');
+  }
+
   localStorage.removeItem(STORAGE_KEY);
+  evt.currentTarget.reset();
   console.log(formData);
+  //   formData = {};
 }
 
 function getSaveMessage() {
-  const savedMessage = localStorage.getItem(STORAGE_KEY);
+  let savedForm = localStorage.getItem(STORAGE_KEY);
 
-  if (savedMessage) {
-    formData = JSON.parse(savedMessage);
+  if (savedForm) {
+    savedForm = JSON.parse(savedForm);
 
-    Object.entries(formData).forEach(([key, value]) => {
+    Object.entries(savedForm).forEach(([key, value]) => {
       form.elements[key].value = value;
     });
   }
